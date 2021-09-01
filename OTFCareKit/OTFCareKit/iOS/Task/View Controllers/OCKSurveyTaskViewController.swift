@@ -27,11 +27,11 @@
  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#if !os(watchOS) && canImport(ResearchKit)
+#if !os(watchOS) && canImport(OTFResearchKit)
 
-import CareKitStore
-import CareKitUI
-import ResearchKit
+import OTFCareKitStore
+import OTFCareKitUI
+import OTFResearchKit
 import UIKit
 
 // MARK: OCKSurveyTaskViewControllerDelegate

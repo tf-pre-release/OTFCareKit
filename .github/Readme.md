@@ -48,19 +48,21 @@ The primary OTFCareKit framework codebase supports iOS and requires Xcode 12.0 o
 * [WWDC: ResearchKit and CareKit Reimagined](https://developer.apple.com/videos/play/wwdc2019/217/)
 
 ### Installation (Cocoapods)
+OTFCareKit can be installed via Cocoapods. To be able to install OTFCareKit via Cocoapods you should specify the podspec source as `source 'https://github.com/HippocratesTech/OTFCocoapodSpecs'` at the beginning of the pod file. Here is what you need to include in your `Podfile` to be able to install OTFCareKit.
 
+````ruby
+# Uncomment the next line to define a global platform for your project
+platform :ios, '13.0'
 
-### Installation (Option One): SPM
+target 'YOUR_TARGET_NAME' do
+  use_frameworks!
+  
+  source 'https://github.com/HippocratesTech/OTFCocoapodSpecs'
 
-CareKit can be installed via SPM. Create a new Xcode project and navigate to `File > Swift Packages > Add Package Dependency`. Enter the url `https://github.com/carekit-apple/CareKit` and tap `Next`. Choose the `main` branch, and on the next screen, check off the packages as needed.
+  pod 'OTFCareKit'
 
-To add localized strings to your project, add the strings file to your project: [English Strings](CareKitUI/CareKitUI/Supporting%20Files/Localization/en.lproj)
-
-### Installation (Option Two): Embedded Framework
-
-Download the project source code and drag in CareKit.xcodeproj, CareKitUI.xcodeproj, and CareKitStore.xcodeproj as needed. Then, embed the framework as a dynamic framework in your app, by adding it to the Embedded Binaries section of the General pane for your target as shown in the figure below.
-
-<img width="1000" alt="embedded-framework" src="https://user-images.githubusercontent.com/51756298/69107216-7fa7ea00-0a25-11ea-89ef-9b8724728e54.png">
+end
+````
 
 ### OCKCatalog App <a name="ockcatalog-app"></a>
 

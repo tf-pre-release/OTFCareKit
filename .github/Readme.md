@@ -49,7 +49,6 @@ Then type the following command in Terminal:
 
 ```
 sudo gem install cocoapods
-
 ```
 
 Then you  need to create a project directory in your user directory.
@@ -62,7 +61,6 @@ For example, in Terminal go to your personal directory by typing this command:
 
 ```
 cd ~
-
 ```
 
 Then create a Development directory (if you haven’t done it already) to create a project directory in it:
@@ -70,7 +68,6 @@ Then create a Development directory (if you haven’t done it already) to create
 
 ```
 mkdir Development
-
 ```
 
 For example, you may want to call your project *MyDigitalHealthApp* and so you would typically also create a directory with the same name in your Development directory:
@@ -80,14 +77,12 @@ For example, you may want to call your project *MyDigitalHealthApp* and so you w
 cd Development
 mkdir MyDigitalHealthApp
 cd MyDigitalHealthApp
-
 ```
 
 In your project directory, if you don’t already have a pod file (which is required by CocoaPods to install frameworks), create one with the command:
 
 ```
 pod init
-
 ```
 
 This will add a default pod file in your project directory. Once your project podfile is ready, you can start adding required podspecs under target in this file.
@@ -102,20 +97,19 @@ Next step is to integrate OTFCareKit with your application. OTFCareKit can be in
 ## OTFCareKit in Cocoapod <a name="OTFCareKit-in-cocoapod"></a>
 
 
-Integrating OTFCareKit with an existing workspace requires the below extra line in your Podfile.
+Integrating OTFCareKit with an existing workspace requires the below extra lines in your Podfile.
 
-Add pod 'OTFCareKit' under target in Podfile.
+````ruby
+  source 'https://github.com/HippocratesTech/OTFCocoapodSpecs'
+  
+  pod 'OTFCareKit'
+````
 
-``` 
-$ pod 'OTFCareKit'
-
-```
 
 Run pod install from the terminal root of your project directory, which will fetch all the external dependencies mentioned by you, and associate it with a .xcworkspace file of your project. This .xcworkspace file will be generated for you if you already do not have one.
 
 ``` 
 $ pod install
-
 ```
 
 Once you successfully install podspec, you can start importing OTFCareKit, OTFCareKitUI and OTFCareKitStore.

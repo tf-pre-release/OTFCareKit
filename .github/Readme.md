@@ -3,7 +3,7 @@
 
 The TheraForge OTFCareKit is a framework for creating digital health applications that help people to better understand and manage their health. The framework provides modules that can be used out of the box, or extended and customized for more targeted use cases.
 
-Please refer to the top-level parent framework: [OTFToolBox](https://github.com/HippocratesTech/StarDust)
+Please refer to the top-level parent framework: [OTFToolBox](https://github.com/HippocratesTech/OTFToolBox)
 
 Read more details regarding [CareKit here](../README.md).
 
@@ -21,7 +21,7 @@ Read more details regarding [CareKit here](../README.md).
 
 ## Prerequisites <a name="prerequisites"></a>
 
-An Intel-based Mac running [macOS Catalina 10.15.4 or later](https://developer.apple.com/documentation/xcode-release-notes/xcode-12-release-notes).
+An Intel-based Mac running [macOS Catalina 10.15.4 or later](https://developer.apple.com/documentation/xcode-release-notes/xcode-12-release-notes) or a Mac with Apple's M1 Silicon running [macOS 11 Big Sur](https://developer.apple.com/documentation/xcode-release-notes/xcode-12_2-release-notes).
 
 Install the following components:
 
@@ -29,7 +29,7 @@ Install the following components:
 
 * CocoaPods 1.10.0 or later
 
-For your projects make sure to target iOS 13 or later
+For your projects make sure to target iOS 13 or later.
 
 ## Project Setup <a name="project-setup"></a>
 
@@ -91,9 +91,6 @@ This will add a default pod file in your project directory. Once your project po
 Next step is to integrate OTFCareKit with your application. OTFCareKit can be installed via Cocoapods.
 
 
-
-
-
 ## OTFCareKit in Cocoapod <a name="OTFCareKit-in-cocoapod"></a>
 
 
@@ -116,7 +113,7 @@ Once you successfully install podspec, you can start importing OTFCareKit, OTFCa
 
 # Build Targets <a name="build-targets"></a>
 
- Theraforge OTFCareKit has included the following build targets to benefit compile time: 
+ Theraforge's OTFCareKit framework includes the following build targets to be more selective at compile time: 
 
    * CARE : OTFCareKit code module will be compiled. 
  

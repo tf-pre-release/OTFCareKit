@@ -3,7 +3,7 @@
 
 The TheraForge OTFCareKit is a framework for creating digital health applications that help people to better understand and manage their health. The framework provides modules that can be used out of the box, or extended and customized for more targeted use cases.
 
-Please refer to the top-level parent framework: [OTFToolBox](https://github.com/HippocratesTech/OTFToolBox)
+Please refer to the top-level parent framework: [OTFToolBox](https://github.com/TheraForge/OTFToolBox)
 
 Read more details regarding [CareKit here](../README.md).
 
@@ -97,7 +97,7 @@ Next step is to integrate OTFCareKit with your application. OTFCareKit can be in
 Integrating OTFCareKit with an existing workspace requires the below extra lines in your Podfile.
 
 ````ruby
-  source 'https://github.com/HippocratesTech/OTFCocoapodSpecs'
+  source 'https://github.com/TheraForge/OTFCocoapodSpecs'
   
   pod 'OTFCareKit'
 ````

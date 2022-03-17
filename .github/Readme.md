@@ -119,13 +119,9 @@ Once you successfully install podspec, you can start importing OTFCareKit, OTFCa
  
    * HEALTH : HealthKit code module will be compiled. 
 
-# Unit Tests <a name="unit-tests"></a>
+# License <a name="License"></a>
 
-Todo: Add Video link
-
-# Licence <a name="license"></a>
-
-Todo: Add Licence
+This project is made available under the terms of a modified BSD license. See the [LICENSE](../../theraforge-main/LICENSE) file.
 
 
 

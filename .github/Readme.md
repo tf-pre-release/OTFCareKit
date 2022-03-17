@@ -121,7 +121,7 @@ Once you successfully install podspec, you can start importing OTFCareKit, OTFCa
 
 # License <a name="License"></a>
 
-This project is made available under the terms of a modified BSD license. See the [LICENSE](../../theraforge-main/README.md) file.
+This project is made available under the terms of a modified BSD license. See the [LICENSE](../../theraforge-main/LICENSE) file.
 
 
 

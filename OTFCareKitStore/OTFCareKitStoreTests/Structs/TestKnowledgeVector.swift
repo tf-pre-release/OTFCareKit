@@ -96,10 +96,13 @@ class TestKnowledgeVector: XCTestCase {
     }
 
     func testEqualVectorsAreNotLessThan() {
+        let process1 = UUID()
+        let process2 = UUID()
+        let process3 = UUID()
         let vectorA = OCKRevisionRecord.KnowledgeVector([
-            UUID(): 2,
-            UUID(): 5,
-            UUID(): 0
+            process1: 2,
+            process2: 5,
+            process3: 0
         ])
 
         let vectorB = vectorA

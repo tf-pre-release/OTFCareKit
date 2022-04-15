@@ -134,12 +134,18 @@ public extension OCKReadOnlyEventStore where Task: OCKAnyVersionableTask {
     }
 
     // This is a recursive async function that gets all events within a query for a given task, examining all past versions of the task
-    private func fetchEvents(task: Task, query: OCKEventQuery, previousEvents: [Event],
-                             callbackQueue: DispatchQueue = .main, completion: @escaping (Result<[Event], OCKStoreError>) -> Void) {
+    func fetchEvents(task: Task, query: OCKEventQuery, previousEvents: [Event],
+                     callbackQueue: DispatchQueue = .main, completion: @escaping (Result<[Event], OCKStoreError>) -> Void) {
         let start = max(task.effectiveDate, query.dateInterval.start)
         let scheduledEndDate = task.schedule.endDate()
         let end = scheduledEndDate == nil ? query.dateInterval.end : min(scheduledEndDate!, query.dateInterval.end)
         let scheduleEvents = task.schedule.events(from: start, to: end)
+
+        guard start < end else {
+            completion(.failure(.fetchFailed(reason: "Date interval not valid")))
+            return
+        }
+
         var outcomeQuery = OCKOutcomeQuery(dateInterval: DateInterval(start: start, end: end))
         outcomeQuery.taskUUIDs = [task.uuid]
         self.fetchOutcomes(query: outcomeQuery, callbackQueue: callbackQueue, completion: { result in
@@ -174,14 +180,12 @@ public extension OCKReadOnlyEventStore where Task: OCKAnyVersionableTask {
                         self.fetchEvents(task: previousVersion, query: nextQuery, previousEvents: events,
                                          callbackQueue: callbackQueue, completion: completion)
                     }
-
                 }
             }
         })
     }
 
     private func fetchNextValidPreviousVersion(for task: Task, callbackQueue: DispatchQueue, completion: @escaping OCKResultClosure<Task?>) {
-
         guard let versionID = task.previousVersionUUIDs.first else {
             completion(.success(nil))
             return
@@ -207,16 +211,21 @@ public extension OCKReadOnlyEventStore where Task: OCKAnyVersionableTask {
         var query = OCKTaskQuery()
         query.uuids = [uuid]
         fetchTasks(query: query, callbackQueue: callbackQueue, completion:
-            chooseFirst(then: completion, replacementError: .fetchFailed(reason: "No task with UUID: \(uuid)")))
+                    chooseFirst(then: completion, replacementError: .fetchFailed(reason: "No task with UUID: \(uuid)")))
     }
 
     private func join(task: Task, with outcomes: [Outcome], and scheduleEvents: [OCKScheduleEvent]) -> [OCKEvent<Task, Outcome>] {
         guard !scheduleEvents.isEmpty else { return [] }
         let offset = scheduleEvents[0].occurrence
         var events = scheduleEvents.map { OCKEvent<Task, Outcome>(task: task, outcome: nil, scheduleEvent: $0) }
+        
         for outcome in outcomes {
-            events[outcome.taskOccurrenceIndex - offset].outcome = outcome
+            let index = outcome.taskOccurrenceIndex - offset
+            if (0..<events.count).contains(index) {
+                events[outcome.taskOccurrenceIndex - offset].outcome = outcome
+            }
         }
+        
         return events
     }
 }

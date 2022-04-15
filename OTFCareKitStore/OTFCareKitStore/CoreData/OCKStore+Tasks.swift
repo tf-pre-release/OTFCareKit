@@ -74,14 +74,16 @@ extension OCKStore {
         callbackQueue: DispatchQueue = .main,
         completion: ((Result<[OCKTask], OCKStoreError>) -> Void)? = nil) {
 
-        transaction(
-            inserts: [], updates: tasks, deletes: [],
-            preInsertValidate: { try self.confirmUpdateWillNotCauseDataLoss(tasks: tasks) }) { result in
-
-            callbackQueue.async {
-                completion?(result.map(\.updates))
-            }
-        }
+            transaction(
+                inserts: [], updates: tasks, deletes: [],
+                preInsertValidate: {
+                    try self.confirmUpdateWillNotCauseDataLoss(tasks: tasks)
+                },
+                completion: { result in
+                    callbackQueue.async {
+                        completion?(result.map(\.updates))
+                    }
+                })
     }
 
     public func deleteTasks(
@@ -166,9 +168,12 @@ extension OCKStore {
     func buildSortDescriptors(for query: OCKTaskQuery) -> [NSSortDescriptor] {
         query.sortDescriptors.map { order -> NSSortDescriptor in
             switch order {
-            case .effectiveDate(ascending: let ascending): return NSSortDescriptor(keyPath: \OCKCDTask.effectiveDate, ascending: ascending)
-            case .title(let ascending): return NSSortDescriptor(keyPath: \OCKCDTask.title, ascending: ascending)
-            case .groupIdentifier(let ascending): return NSSortDescriptor(keyPath: \OCKCDTask.groupIdentifier, ascending: ascending)
+            case .effectiveDate(ascending: let ascending):
+                return NSSortDescriptor(keyPath: \OCKCDTask.effectiveDate, ascending: ascending)
+            case .title(let ascending):
+                return NSSortDescriptor(keyPath: \OCKCDTask.title, ascending: ascending)
+            case .groupIdentifier(let ascending):
+                return NSSortDescriptor(keyPath: \OCKCDTask.groupIdentifier, ascending: ascending)
             }
         } + query.defaultSortDescriptors()
     }
